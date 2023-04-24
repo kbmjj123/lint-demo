@@ -1,24 +1,18 @@
 <template>
-	<div>
-
-	</div>
+  <div></div>
 </template>
 
 <script>
-	export default {
-		name: '',
-		data() {
-			return {}
-		},
-		components: {},
-		created() {
-		},
-		mounted() {
-		},
-		methods: {}
-	}
+export default {
+  name: '',
+  data() {
+    return {}
+  },
+  components: {},
+  created() {},
+  mounted() {},
+  methods: {},
+}
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

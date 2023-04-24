@@ -1,5 +1,5 @@
-import account from './modules/account';
+import account from './modules/account'
 
-export default{
-	account
-};
+export default {
+  account,
+}

@@ -1,4 +1,3 @@
-import axios from '@/utils/api.request';
-export default{
-
-}
+import axios from '@/utils/api.request'
+console.info(oo)
+export default {}
