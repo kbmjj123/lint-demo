@@ -5,10 +5,10 @@
 <script>
 export default {
   name: '',
+  components: {},
   data() {
     return {}
   },
-  components: {},
   created() {},
   mounted() {},
   methods: {},

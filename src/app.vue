@@ -5,10 +5,10 @@
 </template>
 <script>
 export default {
+  components: {},
   data() {
     return {}
   },
-  components: {},
 }
 </script>
 <style lang="less" scope>

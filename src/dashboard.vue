@@ -1,6 +1,3 @@
-<style lang="less">
-@import './style/dashboard.less';
-</style>
 <template>
   <div class="main">
     <!--左边菜单导航栏start-->
@@ -10,14 +7,14 @@
     >
       <shrinkable-menu :data="menus" theme="dark" style="width: 90px">
         <div slot="top" class="logo-con">
-          <img :src="systemLogo" key="min-logo" />
+          <img key="min-logo" :src="systemLogo" />
         </div>
       </shrinkable-menu>
-      <div class="right-menu" v-if="secondMenu.length > 1">
+      <div v-if="secondMenu.length > 1" class="right-menu">
         <div class="menu-tit">{{ shrinkTitle }}管理</div>
-        <nav class="menu-nav" v-if="secondMenuTypes.length === 0">
+        <nav v-if="secondMenuTypes.length === 0" class="menu-nav">
           <template v-for="(item, index) in secondMenu">
-            <div v-bind:key="index" v-if="item.menu">
+            <div v-if="item.menu" :key="index">
               <div
                 class="menu-span"
                 :class="
@@ -33,7 +30,7 @@
           </template>
         </nav>
         <!-- 二级菜单分类 -->
-        <nav class="menu-nav" v-else>
+        <nav v-else class="menu-nav">
           <template v-for="(p, cIndex) in secondMenuTypes">
             <div :key="cIndex" class="menu-span-title">{{ p }}</div>
             <div v-for="(item, index) in secondMenu" :key="p + index">
@@ -71,7 +68,7 @@
             </template>
             <template v-else>
               <div class="main-breadcrumb">
-                <breadcrumb-nav :currentPath="currentPath"></breadcrumb-nav>
+                <breadcrumb-nav :current-path="currentPath"></breadcrumb-nav>
               </div>
             </template>
           </div>
@@ -113,7 +110,7 @@
         </div>
       </div>
       <!--主内容标签页end-->
-      <div class="single-page" ref="single-page">
+      <div ref="single-page" class="single-page">
         <keep-alive>
           <router-view v-if="$route.meta.keepAlive"></router-view>
         </keep-alive>
@@ -131,22 +128,22 @@
       >
         <FormItem label="旧密码：" prop="oldPassword">
           <Input
-            type="password"
             v-model="formData.oldPassword"
+            type="password"
             placeholder="请输入旧密码"
           />
         </FormItem>
         <FormItem label="新密码：" prop="newPassword">
           <Input
-            type="password"
             v-model="formData.newPassword"
+            type="password"
             placeholder="请输入新密码，最少6位"
           />
         </FormItem>
         <FormItem label="确认密码：" prop="confirmPassword">
           <Input
-            type="password"
             v-model="formData.confirmPassword"
+            type="password"
             placeholder="请再次输入新密码"
           />
         </FormItem>
@@ -222,6 +219,15 @@ export default {
       return localStorage.avatorImgPath
     },
   },
+  watch: {
+    $route(to) {
+      this.initMenuSelected(to)
+    },
+  },
+  created() {
+    this.initMenuSelected(this.$route)
+  },
+  mounted() {},
   methods: {
     navTo(item) {
       this.currentPath[1] = item
@@ -331,14 +337,8 @@ export default {
       }
     },
   },
-  watch: {
-    $route(to) {
-      this.initMenuSelected(to)
-    },
-  },
-  created() {
-    this.initMenuSelected(this.$route)
-  },
-  mounted() {},
 }
 </script>
+<style lang="less">
+@import './style/dashboard.less';
+</style>

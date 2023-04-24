@@ -1,16 +1,13 @@
-<style lang="less" scoped>
-@import './styles/menu.less';
-</style>
 <template>
   <div :style="{ background: bgColor }" class="ivu-shrinkable-menu">
     <slot name="top"></slot>
     <Menu
+      ref="sideMenu"
       :style="{
         maxHeight: menuMaxHeight,
         overflowX: 'hidden',
         overflowY: 'scroll',
       }"
-      ref="sideMenu"
       :active-name="routerName"
       :theme="theme"
       width="auto"
@@ -18,9 +15,9 @@
     >
       <template v-for="item in menuList">
         <MenuItem
-          :name="item.name"
           v-if="item.menu"
           :key="'menuitem' + item.name"
+          :name="item.name"
         >
           <span
             :class="[
@@ -31,29 +28,21 @@
             :style="{ fontSize: '16px' }"
           ></span>
           <span
+            :key="'title' + item.name"
             class="layout-text"
             style="line-height: 1.5"
-            :key="'title' + item.name"
-            >{{ item.title }}</span
-          >
+            >{{ item.title }}
+          </span>
         </MenuItem>
       </template>
     </Menu>
   </div>
 </template>
-
 <script>
 import util from '@/utils/util'
 
 export default {
-  data() {
-    return {
-      routerName: '',
-      openNames: '',
-      menuMaxHeight: '',
-    }
-  },
-  name: 'shrinkableMenu',
+  name: 'ShrinkableMenu',
   props: {
     data: {
       type: Array,
@@ -64,24 +53,12 @@ export default {
       default: 'dark',
     },
   },
-  mounted() {
-    this.activeMenuItem(this.$route.name)
-    this.$nextTick(() => {
-      let screenH =
-        document.documentElement.clientHeight ||
-        document.documentElement.clientHeight
-      let menuNode = this.$refs && this.$refs['sideMenu']
-      if (menuNode) {
-        console.info(menuNode.$el.offsetTop)
-        this.menuMaxHeight = `${screenH - menuNode.$el.offsetTop}px`
-      }
-    })
-  },
-  watch: {
-    $route(to) {
-      this.activeMenuItem(to.name)
-    },
-    theme() {},
+  data() {
+    return {
+      routerName: '',
+      openNames: '',
+      menuMaxHeight: '',
+    }
   },
   computed: {
     bgColor() {
@@ -109,6 +86,25 @@ export default {
       // return menus;
       return this.data
     },
+  },
+  watch: {
+    $route(to) {
+      this.activeMenuItem(to.name)
+    },
+    theme() {},
+  },
+  mounted() {
+    this.activeMenuItem(this.$route.name)
+    this.$nextTick(() => {
+      let screenH =
+        document.documentElement.clientHeight ||
+        document.documentElement.clientHeight
+      let menuNode = this.$refs && this.$refs['sideMenu']
+      if (menuNode) {
+        console.info(menuNode.$el.offsetTop)
+        this.menuMaxHeight = `${screenH - menuNode.$el.offsetTop}px`
+      }
+    })
   },
   methods: {
     changeMenu(value) {
@@ -143,3 +139,7 @@ export default {
   },
 }
 </script>
+
+<style lang="less" scoped>
+@import './styles/menu.less';
+</style>

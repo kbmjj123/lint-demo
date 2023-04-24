@@ -23,8 +23,8 @@
           <Button
             style="float: right"
             size="small"
-            @click="enter"
             class="register-btn"
+            @click="enter"
             >注册新用户
           </Button>
         </div>
@@ -33,10 +33,10 @@
             <div class="input-group">
               <FormItem prop="phone">
                 <Input
-                  size="large"
                   v-model="form.phone"
-                  @on-enter="handleSubmit"
+                  size="large"
                   placeholder="请输入用户名"
+                  @on-enter="handleSubmit"
                 >
                   <span slot="prepend">
                     <img src="@/assets/ic_account.png" class="prefix-icon" />
@@ -45,11 +45,11 @@
               </FormItem>
               <FormItem prop="password">
                 <Input
+                  v-model="form.password"
                   size="large"
                   type="password"
-                  @on-enter="handleSubmit"
-                  v-model="form.password"
                   placeholder="请输入密码"
+                  @on-enter="handleSubmit"
                 >
                   <span slot="prepend">
                     <img src="@/assets/ic_password.png" class="prefix-icon" />
@@ -58,11 +58,11 @@
               </FormItem>
               <FormItem prop="verifyCode">
                 <Input
-                  size="large"
-                  @on-enter="handleSubmit"
                   v-model="form.verifyCode"
+                  size="large"
                   :maxlength="4"
                   placeholder="请输入验证码"
+                  @on-enter="handleSubmit"
                 >
                   <span slot="prepend" style="width: 35px">
                     <img src="@/assets/ic_pic_random.png" class="prefix-icon" />
@@ -79,14 +79,14 @@
               </FormItem>
             </div>
             <FormItem style="margin: 5px 0px">
-              <a @click="forgetPassword" href="javascript:">忘记密码？</a>
+              <a href="javascript:" @click="forgetPassword">忘记密码？</a>
             </FormItem>
             <FormItem>
               <Button
-                @click="handleSubmit"
                 type="primary"
                 long
                 :loading="loading"
+                @click="handleSubmit"
               >
                 <span v-if="loading">登录中</span>
                 <span v-else>登录</span>
@@ -96,24 +96,6 @@
         </div>
       </Card>
     </Row>
-    <!--    <Row class="company-msg">-->
-    <!--      <ul class="link-list">-->
-    <!--        <li class="link-item"><a target="view_window"-->
-    <!--                                 href="http://group.zhidianlife.com/index.html">集团介绍</a></li>-->
-    <!--        <li class="link-item"><a target="view_window"-->
-    <!--                                 href="http://group.zhidianlife.com/a/lianxiwomen/">联系我们</a></li>-->
-    <!--        <li class="link-item"><a target="view_window"-->
-    <!--                                 href="http://group.zhidianlife.com/a/chanpinbuju/">蜘点生态</a></li>-->
-    <!--        <li class="link-item"><a target="view_window" href="http://www.zhidianlife.com/">蜘点商城</a>-->
-    <!--        </li>-->
-    <!--        <li class="link-item"><a href="javascript:"-->
-    <!--                                 @click="$router.push({name:'register'})">商家入驻</a></li>-->
-    <!--        <li class="link-item"><a target="view_window"-->
-    <!--                                 href="http://group.zhidianlife.com/a/lianxiwomen/">帮助中心</a></li>-->
-    <!--      </ul>-->
-    <!--      <p>粤ICP备17158130号-1</p>-->
-    <!--      <p>Copyright©&nbsp;蜘点集团，All Rights Reserved</p>-->
-    <!--    </Row>-->
   </div>
 </template>
 <script>

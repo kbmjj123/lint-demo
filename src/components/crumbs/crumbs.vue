@@ -4,11 +4,11 @@
 
 <script>
 export default {
-  name: 'crumbs',
+  name: 'Crumbs',
+  components: {},
   data() {
     return {}
   },
-  components: {},
   created() {},
   mounted() {},
   methods: {},
