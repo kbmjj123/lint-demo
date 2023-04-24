@@ -7,7 +7,7 @@ import axios from 'axios'
 import store from '@/store'
 import { router as routers } from '@/router'
 import $cookies from '@/utils/cookie'
-import { Modal, Message } from 'view-design'
+import { Modal } from 'view-design'
 
 const addErrorLog = (errorInfo) => {
   const {
@@ -26,7 +26,7 @@ const addErrorLog = (errorInfo) => {
 }
 
 class HttpRequest {
-  constructor(baseUrl = baseURL) {
+  constructor(baseUrl) {
     this.baseUrl = baseUrl.baseUrl
     this.loginBaseUrl = baseUrl.loginBaseUrl
     this.queue = {}

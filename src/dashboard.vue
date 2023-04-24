@@ -17,7 +17,7 @@
         <div class="menu-tit">{{ shrinkTitle }}管理</div>
         <nav class="menu-nav" v-if="secondMenuTypes.length === 0">
           <template v-for="(item, index) in secondMenu">
-            <div :key="index" v-if="item.menu">
+            <div v-bind:key="index" v-if="item.menu">
               <div
                 class="menu-span"
                 :class="
@@ -34,8 +34,8 @@
         </nav>
         <!-- 二级菜单分类 -->
         <nav class="menu-nav" v-else>
-          <template v-for="p in secondMenuTypes">
-            <div class="menu-span-title">{{ p }}</div>
+          <template v-for="(p, cIndex) in secondMenuTypes">
+            <div :key="cIndex" class="menu-span-title">{{ p }}</div>
             <div v-for="(item, index) in secondMenu" :key="p + index">
               <div v-if="item.meta.childGroupName === p">
                 <div
@@ -76,10 +76,6 @@
             </template>
           </div>
           <div class="header-avator-con">
-            <!--						<div class="customer-block zhiCustomBtn">-->
-            <!--							<span class="customer-text">客服</span>&nbsp;&nbsp;-->
-            <!--							<img style="width:16px;" class="customer-image" src="@/images/customer.png"/>-->
-            <!--						</div>-->
             <div class="user-dropdown-menu-con" style="margin-right: 20px">
               <Row
                 type="flex"
@@ -178,7 +174,7 @@ export default {
   },
   data() {
     let reg =
-      /^(?![0-9]+$)(?![a-zA-Z]+$)(?!([^(0-9a-zA-Z)]|[\(\)])+$)([^(0-9a-zA-Z)]|[\(\)]|[a-zA-Z]|[0-9]){6,}$/
+      /^(?![0-9]+$)(?![a-zA-Z]+$)(?!([^(0-9a-zA-Z)]|[()])+$)([^(0-9a-zA-Z)]|[()]|[a-zA-Z]|[0-9]){6,}$/
     let passwordData = this.initPasswordData()
     return {
       systemLogo: '',

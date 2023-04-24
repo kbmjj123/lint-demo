@@ -88,7 +88,9 @@ util.formatSku = function (data) {
       arr.push(key + ':' + obj[key])
     }
     str = arr.join(';   ') + ';'
-  } catch (e) {}
+  } catch (e) {
+    console.error(e)
+  }
   return str
 }
 
@@ -276,79 +278,12 @@ util.imageQPress = (url) => {
   }
 }
 
-let $post = (options) => {
-  let xhr = null
-  // 创建对象
-  if (window.XMLHttpRequest) {
-    xhr = new XMLHttpRequest()
-  } else {
-    xhr = new ActiveXObject('Microsoft.XMLHTTP')
-  }
-  // 连接
-  xhr.open('POST', options.url, options.async)
-  if (options.header) {
-    for (let key in options.header) {
-      xhr.setRequestHeader(key, options.header[key])
-    }
-  } else {
-    xhr.setRequestHeader('Content-Type', 'application/json')
-  }
-  xhr.onreadystatechange = function (e) {
-    let res = null
-    if (xhr.readyState == 4 && xhr.status == 200) {
-      try {
-        res = JSON.parse(xhr.responseText)
-      } catch (e) {
-        console.error(e)
-      }
-      options.success && options.success(res)
-    } else {
-      options.fail && options.fail(e)
-    }
-  }
-  xhr.send(options.data)
-}
-
 // 生成随机id
 util.uuid = () => {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
     let r = (Math.random() * 16) | 0,
       v = c === 'x' ? r : (r & 0x3) | 0x8
     return v.toString(16)
-  })
-}
-
-// 提交营业执照等隐私信息
-util.uploadFile = (files, callback) => {
-  let remotePath =
-    'image/' +
-    util.formatTime(new Date(), 'yyyy/mm/dd/') +
-    util.uuid() +
-    '.' +
-    files.type.split('/')[1]
-  let formdata = new FormData()
-  formdata.append('file', files)
-  formdata.append('key', remotePath)
-  $post({
-    // url: 'https://img.zhidianlife.com/h5Upload/uploadImgSingle', // 是用于请求的服务器 URL
-    url: 'https://img.zhidianlife.com/upload/uploadImgSingleWithWatermark?ptype=WholesaleBusinessLicense', // 是用于请求的服务器 URL
-    data: formdata,
-    header: {},
-    success(res) {
-      if (res.result === '000') {
-        if (res.path && res.path.indexOf('http') === -1) {
-          res.path = 'https://img.zhidianlife.com' + res.path
-        }
-        res.url = res.path
-        callback.success && callback.success(res)
-      } else {
-        callback.fail && callback.fail(res)
-      }
-    },
-    fail(res) {
-      callback.fail && callback.fail(res)
-      console.error(res)
-    },
   })
 }
 
@@ -405,7 +340,7 @@ util.getUrlParam = (name) => {
   return (
     (new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(
       decodeURIComponent(location.href)
-    ) || [, ''])[1].replace(/\+/g, '%20') || null
+    ) || [''])[1].replace(/\+/g, '%20') || null
   )
 }
 //超出指定的长度，用...代替

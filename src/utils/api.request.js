@@ -15,17 +15,14 @@ let canRun = true,
 function errorToast(desc) {
   errorTimeout = null
   if (canRun) {
-    // console.log(desc,'desc')
     Message.error(desc || '网络或服务器异常，请稍后再试！')
     canRun = false
     errorTimeout = setTimeout(function () {
       canRun = true
+      clearTimeout(errorTimeout)
     }, 1000)
     return Promise.reject(new Error(desc || 'Error'))
   }
-
-  // console.log('网络或服务器异常，请稍后重试！')
-  // iView.Message.error('网络或服务器异常，请稍后重试！');
 }
 
 export default {
@@ -39,8 +36,8 @@ export default {
         })
         .then((res) => {
           const { data, isType } = res
-          // console.log(res,'请求拦截')
           if (data.result === '000' || isType) {
+            console.info(data.result)
           } else {
             errorToast(data.desc)
           }
@@ -62,8 +59,8 @@ export default {
         })
         .then((res) => {
           const { data, isType } = res
-          // console.log(res,'请求拦截')
           if (data.result === '000' || isType) {
+            console.info(data.result)
           } else {
             errorToast(data.desc)
           }
@@ -88,6 +85,7 @@ export default {
           const { data, isType } = res
           // console.log(res,'请求拦截')
           if (data.result === '000' || isType) {
+            console.info(data.result)
           } else {
             errorToast(data.desc)
           }

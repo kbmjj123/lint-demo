@@ -1,6 +1,4 @@
 module.exports = {
-  'lint-staged': {
-    '*.js': 'eslint --fix',
-    '*.vue': 'eslint --fix',
-  },
+  '*.js': ['eslint --cache --fix', 'git add'],
+  '*.vue': ['eslint --cache --fix', 'git add'],
 }

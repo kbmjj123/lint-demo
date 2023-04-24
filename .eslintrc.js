@@ -13,5 +13,10 @@ module.exports = {
   parserOptions: {
     parser: 'babel-eslint',
   },
-  rules: {},
+  rules: {
+    'no-unused-vars': 'warn',
+    'vue/multi-word-component-names': 'warn',
+    'vue/valid-v-for': 'warn',
+    'no-useless-escape': 'warn',
+  },
 }
